@@ -1,0 +1,60 @@
+---
+Assignment: "ASSIGNMENT 3.2"
+Name: "David Selvaraj"
+Date: "2021-10-10"
+output:
+  #word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE)
+```
+
+```{r, include=FALSE}
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(xtable)
+#install.packages('treemap')
+library(treemap)
+```
+
+
+```{r, echo=FALSE}
+## Load the data
+setwd("C:/David/Study_MS/DSC640")
+pop_df <- read_excel("us-population-by-age.xlsx")
+colnames(pop_df) <- c('Year','Under5','5to19','20to44','45to64','65+')
+names(pop_df)
+```
+
+
+```{r, echo=FALSE}
+treemap(pop_df, #Your data frame object
+        index=c("Under5"),  #A list of your categorical variables
+        vSize = "Year",  #This is your quantitative variable
+        title="R Tree Map", #Customize your title
+        fontsize.title = 14 #Change the font size of the title
+        )
+```
+
+```{r, echo=FALSE}
+plot = ggplot(pop_df, aes(x=Year, y=Under5, fill='Under5'))
+plot + geom_area(color='black') +
+  ggtitle("R Area Chart") +
+  labs(x="Year", y="Percentage of Age Group")
+```
+
+```{r, echo=FALSE}
+setwd("C:/David/Study_MS/DSC640")
+stack_df <- read_excel("Stacked_Data.xlsx")
+#print(stack_df)
+plot = ggplot(stack_df, aes(x=Year, y=Count, fill=Age))
+plot + 
+  geom_area(colour="black", size=.2, alpha=.8) +
+  theme_bw() +
+  #scale_x_continuous(breaks=seq(1993,2017,1)) +
+  #scale_y_continuous(breaks=seq(0,2000000,100000)) +
+  ggtitle("R Stacked Area Chart") +
+  labs(x="Year", y="Percentage of Age Group")
+```
