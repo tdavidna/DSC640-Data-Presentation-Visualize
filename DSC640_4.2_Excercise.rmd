@@ -1,0 +1,47 @@
+---
+Assignment: "ASSIGNMENT 4.2"
+Name: "David Selvaraj"
+Date: "2021-10-24"
+output:
+  #word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE)
+```
+
+```{r, include=FALSE}
+library(ggplot2)
+library(readxl)
+library(dplyr)
+library(xtable)
+library(treemap)
+library(gapminder)
+```
+
+
+```{r, echo=FALSE}
+## Load the data
+setwd("C:/David/Study_MS/DSC640/Data")
+crimerate_df <- read.csv("crimeRatesByState.csv")
+```
+
+
+```{r, echo=FALSE}
+ggplot(crimerate_df, aes(x=murder, y=burglary)) + geom_point() +
+  ggtitle("R Scatter Plot") +
+  labs(x="Murder", y="Burglary")
+```
+
+```{r, echo=FALSE}
+ggplot(crimerate_df, aes(x=murder, y=burglary)) + 
+  geom_point(aes(color = murder, size = burglary),alpha=0.7) +
+  ggtitle("R Bubble Plot") +
+  labs(x="Murder", y="Burglary")
+```
+
+```{r, echo=FALSE}
+ggplot(crimerate_df, aes(x=murder))+
+  geom_density(color="darkblue", fill="lightblue") +
+  ggtitle("R Density Plot")
+```
